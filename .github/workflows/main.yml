@@ -12,7 +12,7 @@ jobs:
 
     - name: Add config.ini file
       run: |
-        printf ${{ secrets.config }} > config.ini
+        printf "hi" > config.ini
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
