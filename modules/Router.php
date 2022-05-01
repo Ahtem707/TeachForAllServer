@@ -11,9 +11,7 @@ class Request {
     public array $query = [];
     public array $body = [];
 
-    function __construct() {
-        $this->header["Content-Type"] = "application/json;charset=utf-8";
-    }
+    function __construct() {}
 
     static function Server() {
         $self = new Request();
@@ -69,11 +67,14 @@ class Router {
             case "auth/register":
                 $this->router->makeRegister($req,$res);
                 break;
+            default:
+                $res->body["Start page"] = "page";
+                break;
         }
 
-        foreach($res->header as $key=>$value) {
-            header($key.":".$value);
-        }
+        // foreach($res->header as $key=>$value) {
+        //     header($key.":".$value);
+        // }
         echo json_encode($res->body);
     }
 }

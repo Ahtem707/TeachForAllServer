@@ -10,7 +10,7 @@ include('extension/Response.php');
 
 // Modules
 include('modules/Constants.php');
-include('modules/Configuration.php');
+// include('modules/Configuration.php');
 include('modules/sqlManager.php');
 include('modules/Router.php');
 
