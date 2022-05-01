@@ -134,7 +134,7 @@ class RouterFactory {
             $res->body = Response::failure($result->error);
         } else {
             $data = [];
-            $data["avatar"] = $userId;
+            $data["userId"] = $userId;
             $data["avatar"] = $avatar;
             $data["surname"] = $surname;
             $data["name"] = $name;
