@@ -10,9 +10,9 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
 
-      - name: Add config.ini file
-        run: |
-          printf ${{ secrets.config }} > config.ini
+    - name: Add config.ini file
+      run: |
+        printf ${{ secrets.config }} > config.ini
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
