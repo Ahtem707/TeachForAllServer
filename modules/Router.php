@@ -103,14 +103,22 @@ class RouterFactory {
             $res->body = Response::failure($e);
             return;
         }
-        $reqString = "SELECT userId FROM Users
+        $reqString = "SELECT userId, avatar, surname, name, middlename, phone, email, position
+                      FROM Users
                       WHERE $login AND password='$password'";
         $result = $this->sqlManager->request($reqString);
         try {
             if($result->error ?? false) { throw $result->error; }
             $data = $result->data ?? throw new Exception("Not data");
-            $result = $data[0] ?? throw new Exception("User not found");
-            $userId = $result["userId"] ?? throw new Exception("User not found");
+            $user = $data[0] ?? throw new Exception("User not found");
+            $userId = $user["userId"] ?? throw new Exception("User userId not found");
+            $avatar = $user["avatar"] ?? "";
+            $surname = $user["surname"] ?? throw new Exception("User surname not found");
+            $name = $user["name"] ?? throw new Exception("User name not found");
+            $middlename = $user["middlename"] ?? "";
+            $phone = $user["phone"] ?? throw new Exception("User phone not found");
+            $email = $user["email"] ?? "";
+            $position = $user["position"] ?? "";
         } catch(Exception $e) {
             Console::error("Router: Error: ".$e->getMessage());
             $res->body = Response::failure($e);
@@ -125,7 +133,16 @@ class RouterFactory {
         if($result->error ?? false) {
             $res->body = Response::failure($result->error);
         } else {
-            $data = array("tokenId"=>$tokenId);
+            $data = [];
+            $data["avatar"] = $userId;
+            $data["avatar"] = $avatar;
+            $data["surname"] = $surname;
+            $data["name"] = $name;
+            $data["middlename"] = $middlename;
+            $data["phone"] = $phone;
+            $data["email"] = $email;
+            $data["position"] = $position;
+            $data["tokenId"] = $tokenId;
             $res->body = Response::success($data);
         }
     }
