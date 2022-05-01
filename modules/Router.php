@@ -79,7 +79,7 @@ class Router {
 }
 
 class RouterFactory {
-    private $sqlManager = null;
+    private $sqlManager;
 
     function __construct() {
         $this->sqlManager = new SqlManager();
