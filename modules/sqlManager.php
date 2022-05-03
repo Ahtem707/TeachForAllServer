@@ -1,6 +1,10 @@
 <?php
 
+SqlManager::$share = new SqlManager();
+
 class SqlManager {
+
+  public static SqlManager $share;
 
   private $host;
   private $user;
@@ -60,5 +64,14 @@ class SqlManager {
       }
       return new Result($result, null);
     }
+  }
+}
+
+function toValue($value) {
+  if($value == null) {
+      return "NULL";
+  } else {
+      $v = intval($value);
+      return $v ? "$v" : "'$value'";
   }
 }
