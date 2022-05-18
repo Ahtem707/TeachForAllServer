@@ -1,7 +1,10 @@
 <?php
-    error_reporting(-1);
-    ini_set('display_errors',1);
-    header('Content-Type: text/html; charset=utf-8');
-    header("HTTP/1.1 404 Not Found");
-    exit;
+
+    function setupHeader() {
+        error_reporting(-1);
+        ini_set('display_errors',1);
+        header('Content-Type: application/json;charset=utf-8');
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: *");
+    }
 ?>

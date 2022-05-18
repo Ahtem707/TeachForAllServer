@@ -1,5 +1,11 @@
 <?php
 
+// Header configure only
+// if($_SERVER['SERVER_NAME'] == 'localhost') {
+//     // header("Access-Control-Allow-Origin: *");
+//     include('modules/Configuration.php');
+// }
+
 // Testing
 include('testing/Console.php');
 
@@ -11,8 +17,13 @@ include('extension/RequesMethod.php');
 
 // Modules
 include('modules/Constants.php');
-// include('modules/Configuration.php');
 include('modules/sqlManager.php');
+include('modules/Configuration.php');
+
+// For moker configure
+if(_isMoker) {
+    setupHeader();
+}
 
 // Router
 include('router/index.php');

@@ -85,4 +85,30 @@ class Auth extends RouterModule {
             $this->res->body = Response::success($result->data);
         }
     }
+
+    // UserCheck
+    function userCheck() {
+        Console::log($_SERVER["HTTP_AUTHORIZATION"]);
+        Console::log($_SERVER["HTTP_USERID"]);
+        if($_SERVER.header)
+
+        try {
+            $id = $_SERVER["HTTP_USERID"] ?? null;
+            $token = $_SERVER["HTTP_AUTHORIZATION"] ?? null;
+        } catch(Exception $e) {
+            Console::error("Router: Error: ".$e->getMessage());
+            $this->res->body = Response::failure($e);
+            return;
+        }
+
+        $reqString = "SELECT userId
+                      FROM Users
+                      WHERE userId = '$id' AND tokenId = '$token'";
+        $result = SqlManager::$share->request($reqString);
+        if($result->error ?? false) {
+            $this->res->body = Response::failure($result->error);
+        } else {
+            $this->res->body = Response::success($result->data);
+        }
+    }
 }

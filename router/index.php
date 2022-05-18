@@ -57,7 +57,10 @@ class Router {
 
         $auth = new Auth($req, $res);
         $discipline = new Discipline($req, $res);
-
+        
+        // Для тестирования запросов
+        Console::logRequest();
+        
         switch($req->path) {
             case "auth/login":
                 $auth->makeLogin($req,$res);
