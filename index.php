@@ -1,11 +1,5 @@
 <?php
 
-// Header configure only
-// if($_SERVER['SERVER_NAME'] == 'localhost') {
-//     // header("Access-Control-Allow-Origin: *");
-//     include('modules/Configuration.php');
-// }
-
 // Testing
 include('testing/Console.php');
 

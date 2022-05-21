@@ -1,0 +1,24 @@
+on:
+  push:
+    branches: [Build/Release]
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+
+    - name: Add config.ini file
+      run: |
+        printf "${{ secrets.config }}" > config.ini
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: 31.31.196.23
+        port: 21
+        protocol: FTP
+        username: ${{ secrets.ftp_username }}
+        password: ${{ secrets.ftp_password }}
