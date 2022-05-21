@@ -24,7 +24,7 @@ class Discipline extends RouterModule {
             return;
         }
 
-        $reqString = "SELECT d.disciplineId, d.logo, d.fullName, d.shortName, u.name as author, d.numberOfHour, d.format
+        $reqString = "SELECT d.disciplineId, d.logoSrc, d.fullName, d.shortName, d.description, u.name as author, d.numberOfHour, d.format
                       FROM Discipline as d, Users as u
                       WHERE d.authorId = u.userId
                       $limitString";
@@ -39,16 +39,18 @@ class Discipline extends RouterModule {
     private function add() {
         try {
             $body = $this->req->body;
-            $logo = $body['logo'] ?? null;
+            $logoSrc = $body['logoSrc'] ?? null;
             $fullName = $body['fullName'] ?? throw new Exception("Discipline 'fullName' not found");
             $shortName = $body['shortName'] ?? throw new Exception("Discipline 'shortName' not found");
+            $description = $body['description'] ?? throw new Exception("Discipline 'description' not found");
             $authorId = $body['authorId'] ?? throw new Exception("Discipline 'authorId' not found");
             $numberOfHour = $body['numberOfHour'] ?? null;
             $format = $body['format'] ?? null;
 
-            $logo = toValue($logo);
+            $logoSrc = toValue($logoSrc);
             $fullName = toValue($fullName);
             $shortName = toValue($shortName);
+            $description = toValue($description);
             $authorId = toValue($authorId);
             $numberOfHour = toValue($numberOfHour);
             $format = toValue($format);
@@ -59,8 +61,8 @@ class Discipline extends RouterModule {
         }
 
         $reqString = "INSERT INTO
-                        Discipline(logo, fullName, shortName, authorId, numberOfHour, format)
-                      VALUE($logo,$fullName,$shortName,$authorId,$numberOfHour,$format)";
+                        Discipline(logoSrc, fullName, shortName, authorId, numberOfHour, format)
+                      VALUE($logoSrc,$fullName,$shortName,$description,$authorId,$numberOfHour,$format)";
         $result = SqlManager::$share->request($reqString);
         if($result->error ?? false) {
             $this->res->body = Response::failure($result->error);

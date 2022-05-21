@@ -59,7 +59,7 @@ class Router {
         $discipline = new Discipline($req, $res);
         
         // Для тестирования запросов
-        Console::logRequest();
+        // Console::logRequest();
         
         switch($req->path) {
             case "auth/login":
