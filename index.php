@@ -11,8 +11,13 @@ include('extension/RequesMethod.php');
 
 // Modules
 include('modules/Constants.php');
-// include('modules/Configuration.php');
 include('modules/sqlManager.php');
+include('modules/Configuration.php');
+
+// For moker configure
+if(_isMoker) {
+    setupHeader();
+}
 
 // Router
 include('router/index.php');
